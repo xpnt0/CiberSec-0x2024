@@ -1,0 +1,73 @@
+version: "3"
+services:
+  babypoems:
+    build: web
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    environment:
+      - "SQLALCHEMY_DATABASE_URI=mysql+pymysql://babypoemsdbuser:babypoemsdbpassword@db:3306/babypoemsdb"
+      - CHALLENGE_FLAG=CSU{n1c3_xss_t3chn1qu3}
+    ports:
+      - "8083:8080"
+    depends_on:
+      - chrome
+      - redis
+      - db
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.2
+
+  db:
+    image: mariadb
+    command: --default-authentication-plugin=mysql_native_password
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: babypoemsrootpassword
+      MYSQL_DATABASE: babypoemsdb
+      MYSQL_USER: babypoemsdbuser
+      MYSQL_PASSWORD: babypoemsdbpassword
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.3
+
+  chrome:
+    image: selenium/node-chrome:4.11.0-20230801
+    shm_size: 2gb
+    restart: on-failure
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.4
+
+  selenium-hub:
+    image: selenium/hub:4.11.0-20230801
+    restart: on-failure
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.5
+
+  redis:
+    image: redis:7-alpine
+    restart: on-failure
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.6
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+

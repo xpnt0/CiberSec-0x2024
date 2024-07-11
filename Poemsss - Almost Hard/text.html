@@ -1,0 +1,113 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>CibersecUNI 2023 Global Poem Contest</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/fontawesome-all.min.css"/>
+    <link rel="stylesheet" href="/static/css/styles.css"/>
+    <script src="/static/js/bootstrap.bundle.min.js"
+            integrity="sha256-0upsHgyryiDRjpJLJaHNAYfDi6fDP2CrBuGwQCubzbU="></script>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="/">
+                <img src="/static/cibersec.png" height="18" alt="Cibersec Logo" loading="lazy"/>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/poem"><i class="fa-solid fa-feather"></i> Write poem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                    </li>
+                
+            </ul>
+            <!-- Left links -->
+        </div>
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            <!-- User profile -->
+            <div class="right-menu">
+                
+                    <a class="nav-link" href="#" title="CSU{n1c3_xss_t3chn1qu3}">
+                        admin
+                    </a>
+                
+            </div>
+        </div>
+        <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+
+<div class="p-5 text-center bg-light">
+    
+        
+    
+    
+    <div class="tab-content col-md-10 offset-md-1">
+        
+            <div id="userpoem">
+                <h2>admin's poem</h2>
+                <hr class="mt-1 mb-1"/>
+                <p>
+        Con diez cañones por banda,
+        viento en popa, a toda vela,
+        no corta el mar, sino vuela
+        un velero bergantín.
+        Bajel pirata que llaman,
+        por su bravura, El Temido,
+        en todo mar conocido
+        del uno al otro confín.</p>
+                <hr class="mt-1 mb-1"/>
+            </div>
+        
+        <form id="poemform" method="POST" action="/poem/">
+            <div class="mb-3">
+                <label for="aboutme" class="form-label">About me</label>
+                <input type="text" class="form-control" id="aboutme" name="aboutme" value="CSU{n1c3_xss_t3chn1qu3}">
+                <div id="aboutmehelp" class="form-text">Describe shortly why you are the best poet.</div>
+            </div>
+            <div class="mb-3">
+                <label for="poemtext" class="form-label">Poem editor</label>
+                <textarea class="form-control" id="poemtext" name="poem" rows="10">
+        Con diez cañones por banda,
+        viento en popa, a toda vela,
+        no corta el mar, sino vuela
+        un velero bergantín.
+        Bajel pirata que llaman,
+        por su bravura, El Temido,
+        en todo mar conocido
+        del uno al otro confín.</textarea>
+            </div>
+            <input type="hidden" name="csrf_token" value="IjdiZWY0YTM5MThmZDYyZjkxMWJiNTIzMzAyY2ViY2Q5YmNjYTFhOTgi.Zmp0-g.nMJgMJSaFk_O5xQ1WF3MTDoWQrk"/>
+            <button type="submit" class="btn btn-primary">Save submission</button>
+        </form>
+        <form id="visitform" method="POST" action="/visit/">
+            <h2>Have you finished writing a beautiful poem? Send it to us for review!</h2>
+            <p>¡Remember to save the poem before requesting a review!</p>
+            <button type="submit" class="btn btn-danger">Request poem review</button>
+            <input type="hidden" name="csrf_token" value="IjdiZWY0YTM5MThmZDYyZjkxMWJiNTIzMzAyY2ViY2Q5YmNjYTFhOTgi.Zmp0-g.nMJgMJSaFk_O5xQ1WF3MTDoWQrk"/>
+        </form>
+    </div>
+
+    </div>
+</body>

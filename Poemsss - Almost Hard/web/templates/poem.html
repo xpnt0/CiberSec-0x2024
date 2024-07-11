@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="tab-content col-md-10 offset-md-1">
+        {% if user.poem %}
+            <div id="userpoem">
+                <h2>{{ user.username }}'s poem</h2>
+                <hr class="mt-1 mb-1"/>
+                <p>{{ user.poem | safe }}</p>
+                <hr class="mt-1 mb-1"/>
+            </div>
+        {% endif %}
+        <form id="poemform" method="POST" action="/poem/">
+            <div class="mb-3">
+                <label for="aboutme" class="form-label">About me</label>
+                <input type="text" class="form-control" id="aboutme" name="aboutme" value="{{ current_user.user.aboutme }}">
+                <div id="aboutmehelp" class="form-text">Describe shortly why you are the best poet.</div>
+            </div>
+            <div class="mb-3">
+                <label for="poemtext" class="form-label">Poem editor</label>
+                <textarea class="form-control" id="poemtext" name="poem" rows="10">{{ user.poem }}</textarea>
+            </div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="submit" class="btn btn-primary">Save submission</button>
+        </form>
+        <form id="visitform" method="POST" action="/visit/">
+            <h2>Have you finished writing a beautiful poem? Send it to us for review!</h2>
+            <p>¡Remember to save the poem before requesting a review!</p>
+            <button type="submit" class="btn btn-danger">Request poem review</button>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        </form>
+    </div>
+{% endblock %}

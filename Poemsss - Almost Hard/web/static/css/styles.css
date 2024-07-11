@@ -1,0 +1,8 @@
+#visitform, #poemform{
+    margin-top: 30px;
+}
+
+#userpoem {
+    font-family: cursive;
+    white-space: pre-line;
+}

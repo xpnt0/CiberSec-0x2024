@@ -1,0 +1,10 @@
+flask
+flask-login
+wtforms
+Flask-SQLAlchemy
+pymysql
+selenium
+rq
+redis
+Flask-WTF
+werkzeug==2.3.0

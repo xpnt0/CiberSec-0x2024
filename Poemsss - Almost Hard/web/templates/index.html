@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>CibersecUNI 2023 Poetry Competition</h1>
+    <img src="/static/poetry-contest.jpg" alt="Poetry context">
+  <p>Do you want to participate?
+      {% if current_user.is_authenticated %}
+          <a href="{{ url_for('poem') }}">Go to your profile</a>
+      {% else %}
+          <a href="{{ url_for('login') }}">log in</a> or <a href="{{ url_for('register') }}">register</a>
+      {% endif %}
+{% endblock %}
